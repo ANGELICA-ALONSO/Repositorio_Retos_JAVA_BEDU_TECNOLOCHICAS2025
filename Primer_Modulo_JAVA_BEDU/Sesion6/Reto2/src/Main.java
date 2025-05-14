@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) {
 //  Lista de temas
-        List<Tema> temas = new ArrayList<>();
+        CopyOnWriteArrayList<Tema> temas = new CopyOnWriteArrayList<>();
         temas.add(new Tema("Lectura comprensiva", 2));
         temas.add(new Tema("Matemáticas básicas", 1));
         temas.add(new Tema("Cuidado del medio ambiente", 3));
@@ -29,5 +31,18 @@ public class Main {
         for (Tema t : temas){
             System.out.println(t);
         }
+
+//    Mapa concurrente de recursos usando ConcurrentHashMap
+        ConcurrentHashMap<String, String> recursos = new ConcurrentHashMap<>();
+        recursos.put("Lectura comprensiva", "https://recursos.edu/lectura");
+        recursos.put("Matemáticas básicas", "https://recursos.edu/mate");
+        recursos.put("Cuidado del medio ambiente", "https://recursos.edu/ambiente");
+
+//        Mostrar el repositorio de recursos por tema
+        System.out.println("\n Repositorio de recursos por tema: ");
+        for (String tema : recursos.keySet()){
+            System.out.println(tema + " -> " + recursos.get(tema));
+        }
     }
+
 }
